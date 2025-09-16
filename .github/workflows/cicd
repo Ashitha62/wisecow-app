@@ -1,0 +1,32 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build Docker image
+      run: |
+        docker build -t ashitha26/wisecow-app:latest -t ashitha26/wisecow-app:${{ github.sha }} .
+
+    - name: Push to Docker Hub
+      run: |
+        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+        docker push ashitha26/wisecow-app:latest
+        docker push ashitha26/wisecow-app:${{ github.sha }}
+
+    - name: Deploy to Kubernetes
+      run: |
+        # Update deployment to use the latest SHA image
+        kubectl set image deployment/wisecow-deployment wisecow-app=ashitha26/wisecow-app:${{ github.sha }} --record
+        kubectl apply -f k8s/service.yaml
+
