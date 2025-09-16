@@ -6,3 +6,4 @@ minikube-linux-amd64
 *.tmp
 .DS_Store
 
+minikube-linux-amd64
