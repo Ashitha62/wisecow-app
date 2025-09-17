@@ -10,7 +10,7 @@ COPY wisecow.sh /wisecow.sh
 RUN chmod +x /wisecow.sh
 
 # Expose port
-EXPOSE 4499
+EXPOSE 8080
 
 # Start script
 CMD ["/wisecow.sh"]
