@@ -16,4 +16,3 @@ ENV PATH="/usr/games:${PATH}"
 EXPOSE 4499
 CMD ["bash", "./wisecow.sh"]
  
-ADD THIS FOLDER
