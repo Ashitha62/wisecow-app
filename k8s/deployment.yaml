@@ -17,4 +17,4 @@ spec:
         - name: wisecow
           image: ashitha26/wisecow-app:latest   # default to latest
           ports:
-            - containerPort: 8080
+            - containerPort: 4499

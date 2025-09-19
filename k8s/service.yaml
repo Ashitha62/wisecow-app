@@ -1,14 +1,14 @@
-
 apiVersion: v1
 kind: Service
 metadata:
   name: wisecow-service
 spec:
+  type: ClusterIP   # expose only inside the cluster
   selector:
     app: wisecow
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 8080
-  type: NodePort
-
+      port: 4499        # service port inside cluster
+      targetPort: 4499  # pod port
+      
+      

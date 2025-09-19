@@ -3,22 +3,21 @@ kind: Ingress
 metadata:
   name: wisecow-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: "selfsigned-issuer"
 spec:
-  rules:
-  - host: www.wisecow.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: wisecow-service
-            port:
-              number: 8080
   tls:
-  - hosts:
-    - www.wisecow.com
-    secretName: wisecow-tls
+    - hosts:
+        - wisecow.local
+      secretName: wisecow-tls
+  rules:
+    - host: wisecow.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wisecow-service
+                port: 
+                  number: 4499
 
