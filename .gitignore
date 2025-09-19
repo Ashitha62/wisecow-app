@@ -2,7 +2,7 @@
 minikube-linux-amd64
 
 # Ignore OS or editor files (optional)
-*.log
+
 *.tmp
 .DS_Store
 
